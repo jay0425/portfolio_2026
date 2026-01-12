@@ -143,7 +143,7 @@ const SkillDetailPanel = ({
       return {
         title: "Hover a skill",
         levelText: "—",
-        desc: "스킬에 마우스를 올리면 아래에 상세 설명이 표시돼.",
+        desc: "스킬에 마우스를 올리면 상세 설명이 여기에 표시됩니다.",
         level: 0,
         percentText: "—",
       };
@@ -158,46 +158,28 @@ const SkillDetailPanel = ({
   }, [skill]);
 
   return (
-    <div className="mt-8 max-w-5xl mx-auto" onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}>
-      {/* ✅ 흔들림(레이아웃 점프) 방지 핵심:
-          - 패널 영역 자체는 항상 '고정 높이'를 차지하게 두고
-          - 안쪽 카드만 opacity/transform으로 나타났다 사라지게 함 */}
-      <div className="h-[260px]">
-        <div
-          className={[
-            "h-full rounded-2xl border border-border bg-popover shadow-2xl p-5 outline-none",
-            "transition-all duration-200 ease-out will-change-[transform,opacity]",
-            open ? "opacity-100 translate-y-0" : "opacity-0 translate-y-1 pointer-events-none",
-          ].join(" ")}
-        >
-          <div className="flex items-start justify-between gap-4">
-            <div>
-              <h4 className="text-base font-semibold text-foreground">{content.title}</h4>
-              <p className="mt-1 text-xs text-muted-foreground font-mono">{content.levelText}</p>
-            </div>
+    <div
+      className="relative w-full min-h-[170px] md:min-h-[150px]"
+      onMouseEnter={onMouseEnter}
+      onMouseLeave={onMouseLeave}
+    >
+      <div
+        className={[
+          "absolute inset-0",
+          "grid gap-3",
+          "rounded-2xl border border-border bg-popover shadow-2xl p-5 outline-none",
+          "transition-all duration-200 ease-out will-change-[transform,opacity]",
+          open ? "opacity-100 translate-y-0" : "opacity-0 translate-y-1 pointer-events-none",
+        ].join(" ")}
+        aria-hidden={!open}
+      >
+        <div className="flex items-center gap-4">
+          <h4 className="text-base font-semibold text-foreground">{content.title}</h4>
+          <p className="mt-1 text-xs text-muted-foreground font-mono">{content.levelText}</p>
+        </div>
 
-            {skill && (
-              <span className="text-[11px] px-2 py-1 rounded-full border border-border/60 bg-background/40 text-muted-foreground font-mono">
-                {content.percentText}
-              </span>
-            )}
-          </div>
-
-          <div className="mt-4 rounded-xl border border-border/60 bg-background/40 p-4">
-            <p className="text-sm text-muted-foreground leading-relaxed">{content.desc}</p>
-          </div>
-
-          <div className="mt-4 flex items-center gap-2">
-            <div className="h-2 flex-1 bg-secondary rounded-full overflow-hidden">
-              <div
-                className="h-full bg-gradient-to-r from-primary to-primary/70 rounded-full transition-all duration-700"
-                style={{ width: `${content.level}%` }}
-              />
-            </div>
-            <span className="text-xs text-muted-foreground font-mono w-[52px] text-right">
-              {skill ? content.percentText : "—"}
-            </span>
-          </div>
+        <div className="rounded-xl border border-border/60 bg-background/40 p-4 min-h-21">
+          <p className="text-sm leading-relaxed">{content.desc}</p>
         </div>
       </div>
     </div>
@@ -232,45 +214,49 @@ const SkillSection = () => {
   }, []);
 
   return (
-    <section id="skills" className="h-full flex flex-col justify-center py-16 md:py-24">
-      <div className="container mx-auto px-6">
-        <div className="text-center mb-12">
+    <section
+      id="skills"
+      className="h-full w-full flex flex-col items-center justify-center py-16 md:py-24"
+    >
+      <div className="flex flex-col mx-auto px-6">
+        <div className="text-center mb-6">
           <p className="text-primary font-mono text-sm mb-2">스킬 위에 마우스를 올려 봐주세요</p>
           <h2 className="text-3xl md:text-4xl font-bold text-foreground">Skills & Technologies</h2>
         </div>
 
-        <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
-          {skills.map((skillGroup, idx) => (
-            <div
-              key={skillGroup.category}
-              className="card-gradient border border-border rounded-xl p-5 hover:border-primary/50 transition-all duration-300 hover:glow"
-              style={{ animationDelay: `${idx * 0.1}s` }}
-            >
-              <h3 className="text-lg font-semibold text-foreground mb-4 pb-3 border-b border-border">
-                {skillGroup.category}
-              </h3>
+        <div className="flex flex-col gap-6 max-w-5xl">
+          <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+            {skills.map((skillGroup, idx) => (
+              <div
+                key={skillGroup.category}
+                className="card-gradient border border-border rounded-xl p-5 hover:border-primary/50 transition-all duration-300 hover:glow"
+                style={{ animationDelay: `${idx * 0.1}s` }}
+              >
+                <h3 className="text-lg font-semibold text-foreground mb-4 pb-3 border-b border-border">
+                  {skillGroup.category}
+                </h3>
 
-              <div className="space-y-4">
-                {skillGroup.items.map((skill) => (
-                  <SkillItem
-                    key={skill.name}
-                    skill={skill}
-                    onEnter={openWithSkill}
-                    onLeave={closeSoon}
-                  />
-                ))}
+                <div className="space-y-3">
+                  {skillGroup.items.map((skill) => (
+                    <SkillItem
+                      key={skill.name}
+                      skill={skill}
+                      onEnter={openWithSkill}
+                      onLeave={closeSoon}
+                    />
+                  ))}
+                </div>
               </div>
-            </div>
-          ))}
-        </div>
+            ))}
+          </div>
 
-        {/* ✅ 섹션 내부 grid 아래에 "고정 높이" 패널 */}
-        <SkillDetailPanel
-          skill={activeSkill}
-          open={open}
-          onMouseEnter={cancelClose}
-          onMouseLeave={closeSoon}
-        />
+          <SkillDetailPanel
+            skill={activeSkill}
+            open={open}
+            onMouseEnter={cancelClose}
+            onMouseLeave={closeSoon}
+          />
+        </div>
       </div>
     </section>
   );

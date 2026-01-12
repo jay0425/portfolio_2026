@@ -4,9 +4,8 @@ const IntroSection = () => {
   return (
     <section
       id="intro"
-      className="h-full flex flex-col justify-center relative overflow-hidden pt-20"
+      className="h-full w-full flex flex-col items-center justify-center relative overflow-hidden pt-12 pb-8 md:pt-16 md:pb-10"
     >
-      {/* background blobs */}
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/10 rounded-full blur-3xl animate-float" />
         <div
@@ -15,17 +14,15 @@ const IntroSection = () => {
         />
       </div>
 
-      <div className="container mx-auto px-6 relative z-10">
-        {/* ✅ text + photo layout */}
-        <div className="grid items-center gap-10 lg:grid-cols-[1.15fr_0.85fr]">
-          {/* left: text */}
-          <div className="max-w-4xl">
+      <div className="container w-full mx-auto px-6 relative z-10">
+        <div className="flex justify-evenly">
+          <div className="max-w-3xl">
             <p className="text-primary font-mono text-sm md:text-base mb-4 animate-fade-in">
               안녕하세요,
             </p>
 
             <h1
-              className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 animate-slide-up"
+              className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-5 animate-slide-up"
               style={{ animationDelay: "0.1s" }}
             >
               <span className="text-foreground">프론트엔드 개발자</span>
@@ -35,7 +32,7 @@ const IntroSection = () => {
             </h1>
 
             <p
-              className="text-lg md:text-xl text-muted-foreground max-w-2xl mb-8 animate-slide-up leading-relaxed"
+              className="text-base md:text-lg text-muted-foreground max-w-2xl mb-6 animate-slide-up leading-relaxed"
               style={{ animationDelay: "0.2s" }}
             >
               Next.js · TypeScript 기반으로 실무형 웹을 만드는 프론트엔드 개발자입니다. React
@@ -51,49 +48,30 @@ const IntroSection = () => {
             >
               <a
                 href="#portfolio"
-                className="px-6 py-3 bg-primary text-primary-foreground rounded-lg font-medium hover:bg-primary/90 transition-all hover:scale-105"
+                className="px-5 py-2.5 bg-primary text-primary-foreground rounded-lg font-medium hover:bg-primary/90 transition-all hover:scale-105"
               >
                 프로젝트 보기
               </a>
               <a
                 href="#about"
-                className="px-6 py-3 border border-border text-foreground rounded-lg font-medium hover:bg-secondary transition-all hover:scale-105"
+                className="px-5 py-2.5 border border-border text-foreground rounded-lg font-medium hover:bg-secondary transition-all hover:scale-105"
               >
                 연락하기
               </a>
             </div>
           </div>
-
-          {/* right: photo card */}
-          <div className="relative mx-auto w-full max-w-md lg:max-w-none">
-            <div className="relative rounded-3xl border border-border bg-background/40 backdrop-blur-xl shadow-2xl overflow-hidden animate-slide-up">
-              {/* subtle gradient overlay */}
-              <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-transparent to-primary/5 pointer-events-none" />
-
-              {/* image */}
-              <div className="relative p-3">
-                <div className="relative rounded-2xl overflow-hidden">
-                  <img
-                    src="/me.JPG"
-                    alt="Profile placeholder"
-                    className="w-full aspect-[4/5] object-cover"
-                    loading="lazy"
-                  />
-                  {/* top shine */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-white/10" />
-                </div>
-              </div>
-            </div>
-
-            {/* decorative dots */}
-            <div className="absolute -z-10 -top-6 -right-6 h-24 w-24 rounded-2xl bg-primary/10 blur-xl" />
-            <div className="absolute -z-10 -bottom-8 -left-8 h-32 w-32 rounded-full bg-primary/10 blur-2xl" />
+          <div className="w-[25rem] rounded-full animate-slide-up">
+            <img
+              src="/me.JPG"
+              alt="Profile"
+              className="w-full h-full rounded-2xl object-cover"
+              loading="lazy"
+            />
           </div>
         </div>
       </div>
 
-      {/* Scroll indicator */}
-      <div className="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce">
+      <div className="absolute bottom-6 left-1/2 -translate-x-1/2 animate-bounce">
         <a href="#skills" className="text-muted-foreground hover:text-primary transition-colors">
           <ArrowDown className="w-6 h-6" />
         </a>

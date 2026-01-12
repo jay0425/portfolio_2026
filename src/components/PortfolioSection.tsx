@@ -9,6 +9,7 @@ const projects = [
     tags: ["React", "Tailwind CSS", "DaisyUI", "Node.js", "Express", "PostgreSQL"],
     liveUrl: "https://www.youtube.com/watch?v=Hj9FltPZpcw",
     githubUrl: "https://github.com/jay0425/full-stack-crud",
+    type: "개인 프로젝트",
   },
   {
     title: "YUMMY",
@@ -19,6 +20,7 @@ const projects = [
     tags: ["React", "Redux", "Kakao Open API", "Infinite Scroll", "Netlify"],
     liveUrl: "https://yummy-web.netlify.app/",
     githubUrl: "https://github.com/jay0425/react-team11-project",
+    type: "팀 프로젝트",
   },
   {
     title: "GEPPETTO",
@@ -28,6 +30,7 @@ const projects = [
     tags: ["Vite", "React", "Tailwind CSS", "Zustand", "PocketBase", "Swiper"],
     liveUrl: "https://geppetto88.netlify.app/",
     githubUrl: "https://github.com/jay0425/DoIt88-PetSite",
+    type: "팀 프로젝트",
   },
   {
     title: "JAEFLIX",
@@ -37,6 +40,7 @@ const projects = [
     tags: ["React", "React Query", "TMDB API", "Swiper", "Pagination", "Netlify"],
     liveUrl: "https://tourmaline-faun-f2c3b7.netlify.app/",
     githubUrl: "https://github.com/jay0425/netflix-demo",
+    type: "개인 프로젝트",
   },
 ];
 
@@ -52,14 +56,14 @@ const PortfolioSection = () => {
           <h2 className="text-3xl md:text-4xl font-bold text-foreground">Portfolio</h2>
         </div>
 
-        <div className="grid md:grid-cols-2 gap-8 max-w-6xl mx-auto">
+        {/* <div className="grid grid-cols-4 h-900:grid-cols-4 gap-8 max-w-6xl mx-auto"> */}
+        <div className="grid grid-cols-4 gap-8 max-w-6xl mx-auto">
           {projects.map((project) => (
             <div
               key={project.title}
               className="group card-gradient border border-border rounded-xl overflow-hidden hover:border-primary/50 transition-all duration-500 hover:glow"
             >
-              {/* Project Image */}
-              <div className="relative h-48 sm:h-56 overflow-hidden">
+              <div className="relative h-48 overflow-hidden">
                 <img
                   src={project.image}
                   alt={project.title}
@@ -68,7 +72,6 @@ const PortfolioSection = () => {
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-background/90 to-transparent" />
 
-                {/* Links overlay */}
                 <div className="absolute inset-0 flex items-center justify-center gap-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-background/50">
                   <a
                     href={project.liveUrl}
@@ -91,21 +94,24 @@ const PortfolioSection = () => {
                 </div>
               </div>
 
-              {/* Project Info */}
-              <div className="p-6">
-                <h3 className="text-xl font-semibold text-foreground mb-3 group-hover:text-primary transition-colors">
-                  {project.title}
-                </h3>
+              <div className="p-6 grid gap-1">
+                <div className="flex items-center justify-between">
+                  <h3 className="text-xl font-semibold text-foreground group-hover:text-primary transition-colors">
+                    {project.title}
+                  </h3>
+                  <p className="text-[0.688rem] text-muted-foreground border border-1 rounded-lg px-2 bg-white/5">
+                    {project.type}
+                  </p>
+                </div>
                 <p className="text-muted-foreground text-sm mb-4 leading-relaxed">
                   {project.description}
                 </p>
 
-                {/* Tags */}
-                <div className="flex flex-wrap gap-2">
+                <div className="flex flex-wrap gap-2 group">
                   {project.tags.map((tag) => (
                     <span
                       key={tag}
-                      className="px-3 py-1 bg-secondary text-xs font-mono text-muted-foreground rounded-full"
+                      className="px-3 py-1 bg-secondary text-xs font-mono text-muted-foreground rounded-full group-hover:bg-primary/10 transition-colors"
                     >
                       {tag}
                     </span>

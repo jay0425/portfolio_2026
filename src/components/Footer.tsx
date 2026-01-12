@@ -1,7 +1,7 @@
 const Footer = () => {
   return (
     <footer className="py-8 border-t border-border">
-      <div className="container mx-auto px-6">
+      <div className="container px-6">
         <div className="flex flex-col md:flex-row items-center justify-between gap-4">
           <a href="/" className="text-xl font-bold font-mono text-gradient">
             JAEHEE
